@@ -1,0 +1,5 @@
+aiohttp==3.9.0b0  # Async HTTP requests
+discord.py==2.3.2  # Discord bot library
+selenium==4.29.0   # Web automation library
+python-dotenv==1.0.1  # Load environment variables from .env
+webdriver-manager==4.0.1  # Auto-manages browser drivers
