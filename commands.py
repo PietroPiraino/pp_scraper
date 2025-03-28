@@ -5,3 +5,5 @@ def setup_commands(bot):
     async def test(ctx):
         """Simple test command to check bot functionality."""
         await ctx.send("Bot is running!")
+
+

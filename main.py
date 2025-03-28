@@ -1,8 +1,8 @@
 import asyncio
 from browser_bot import run_browser_scraping
 from config import TOKEN
-import discord_bot
 from selenium_setup import setup_selenium
+from discord_bot import discord_bot
 import sys
 
 @discord_bot.event

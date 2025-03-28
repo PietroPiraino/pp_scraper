@@ -12,7 +12,6 @@ def setup_selenium():
     options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
     options.add_argument("--disable-infobars")  # Disable the "Chrome is being controlled" message
     options.add_argument("--disable-extensions")  # Disable extensions
-    options.add_argument("--start-maximized")  # Start Chrome maximized
     # options.add_argument("--headless")  # Run Chrome in headless mode if you don't need UI (optional)
     options.add_argument("--disable-gpu")  # Disable GPU for headless mode
     
