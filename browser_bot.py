@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 import time
-from config import BETALAND_USERNAME, BETALAND_PASSWORD, DISCORD_CHANNEL_ID
+from config import BETALAND_USERNAME, BETALAND_PASSWORD, DISCORD_CHANNEL_ID_20, DISCORD_CHANNEL_ID_50, DISCORD_CHANNEL_ID_100
 from discord_bot import send_to_discord
 from utils import print_error, print_info, print_success, print_warning
 import csv
@@ -224,6 +224,16 @@ async def retrieve_table_data(driver, stake):
         # Prepare message for Discord
         message =  f"\n**Stake:** €{stake}" + f"\n**Tournament ID:** {tournament_id}\n**Players:**\n" + "\n".join(player_names) if player_names else "**No players found.**"
 
+        # Choose the correct Discord channel based on the stake
+        if stake == "20":
+            DISCORD_CHANNEL_ID = DISCORD_CHANNEL_ID_20
+        elif stake == "50":
+            DISCORD_CHANNEL_ID = DISCORD_CHANNEL_ID_50
+        elif stake == "100":
+            DISCORD_CHANNEL_ID = DISCORD_CHANNEL_ID_100
+        else:
+            print_warning(f"Unknown stake: {stake}. Using default channel.")
+
         await send_to_discord(int(DISCORD_CHANNEL_ID), message)
 
         return table_data
@@ -281,8 +291,9 @@ async def run_browser_scraping(driver):
             switch_to_iframe(driver, "poker-frame")
 
         print_info("Checking for possible running games...")
-        # Alternate between "50" and "100" using cycle_counter
-        button_to_click = "100" if cycle_counter % 2 == 0 else "50"
+        # Alternate between "20", "50", and "100" using cycle_counter
+        buttons = ["20", "50", "100"]
+        button_to_click = buttons[cycle_counter % len(buttons)]
         await observe_game(driver, button_to_click)
         cycle_counter += 1
 
